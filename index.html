@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator · Front-End / Back-End Separation</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232c5cc5'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif'%3E=%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-title">
+      <h1>Calculator</h1>
+      <span class="app-subtitle">front-end / back-end separated</span>
+    </div>
+    <div class="header-actions">
+      <span id="backend-status" class="status status--unknown" title="Backend connectivity">
+        <span class="status-dot"></span><span class="status-text">checking…</span>
+      </span>
+      <button id="theme-toggle" class="icon-btn" title="Toggle dark / light theme" aria-label="Toggle theme">◐</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- ======================= Calculator panel ======================= -->
+    <section class="panel calculator-panel" aria-label="Calculator">
+      <div class="display" id="display">
+        <div class="display-expression" id="expression-line" aria-live="polite">&nbsp;</div>
+        <div class="display-result" id="result-line">0</div>
+      </div>
+
+      <div id="error-banner" class="error-banner hidden" role="alert"></div>
+
+      <div class="sci-panel hidden" id="sci-panel" aria-label="Scientific functions">
+        <button class="key sci" data-insert="sin(">sin(</button>
+        <button class="key sci" data-insert="cos(">cos(</button>
+        <button class="key sci" data-insert="tan(">tan(</button>
+        <button class="key sci" data-insert="ln(">ln(</button>
+        <button class="key sci" data-insert="log(">log(</button>
+        <button class="key sci" data-insert="sqrt(">√(</button>
+        <button class="key sci" data-insert="pi">π</button>
+        <button class="key sci" data-insert="e">e</button>
+        <button class="key sci" data-insert="^2">x²</button>
+        <button class="key sci" data-insert="^">xʸ</button>
+        <button class="key sci" data-insert="!">!</button>
+        <button class="key sci" data-insert="abs(">abs(</button>
+        <button class="key sci" data-insert="floor(">floor(</button>
+        <button class="key sci" data-insert="ceil(">ceil(</button>
+        <button class="key sci" data-insert="round(">round(</button>
+        <button class="key sci" data-insert="fact(">n!</button>
+      </div>
+
+      <div class="keypad" id="keypad">
+        <button class="key fn" data-action="clear">C</button>
+        <button class="key fn" data-action="backspace" title="Backspace">⌫</button>
+        <button class="key" data-insert="(">(</button>
+        <button class="key" data-insert=")">)</button>
+        <button class="key op" data-insert="÷">÷</button>
+
+        <button class="key" data-insert="7">7</button>
+        <button class="key" data-insert="8">8</button>
+        <button class="key" data-insert="9">9</button>
+        <button class="key op" data-insert="×">×</button>
+        <button class="key op" data-insert="^">^</button>
+
+        <button class="key" data-insert="4">4</button>
+        <button class="key" data-insert="5">5</button>
+        <button class="key" data-insert="6">6</button>
+        <button class="key op" data-insert="−">−</button>
+        <button class="key op" data-insert="%">%</button>
+
+        <button class="key" data-insert="1">1</button>
+        <button class="key" data-insert="2">2</button>
+        <button class="key" data-insert="3">3</button>
+        <button class="key op" data-insert="+">+</button>
+        <button class="key fn" data-action="negate">±</button>
+
+        <button class="key" data-insert="0">0</button>
+        <button class="key" data-insert=".">.</button>
+        <button class="key fn" data-action="toggle_sci" id="sci-toggle">ƒx</button>
+        <button class="key op equals" data-action="evaluate">=</button>
+      </div>
+    </section>
+
+    <!-- ======================= History panel ======================= -->
+    <section class="panel history-panel" aria-label="Calculation history">
+      <div class="history-header">
+        <h2>History <span id="history-count" class="badge">0</span></h2>
+        <div class="history-tools">
+          <input id="history-search" type="search" placeholder="Search expression…" aria-label="Search history">
+          <button id="clear-history" class="btn-danger" title="Delete all history">Clear all</button>
+        </div>
+      </div>
+      <ul id="history-list" class="history-list"></ul>
+      <div id="history-empty" class="history-empty hidden">No calculations yet.<br>Try 12 + 8 = …</div>
+      <button id="load-more" class="btn-ghost hidden">Load more</button>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    832401126 · Calculator System · calculation always happens on the back end
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
